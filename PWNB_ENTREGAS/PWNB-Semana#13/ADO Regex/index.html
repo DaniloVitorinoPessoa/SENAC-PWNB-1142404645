@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Clientes</title>
+
+    <style>
+        /* Estilo para o título */
+        h1 {
+            font-family: Arial, sans-serif; 
+            font-size: 24px; 
+            font-weight: bold; 
+            text-align: center;
+        }
+
+        /* Estilo para o botão */
+        button, input[type="button"] {
+            background-color: #3498db;
+            color: #ffffff; 
+            padding: 10px 20px;
+            border: none; 
+            position: absolute;
+            bottom: 0; 
+            left: 50%; 
+            transform: translateX(-50%); 
+        }
+
+        /* Estilo para o botão quando o mouse passa por cima */
+        button:hover, input[type="button"]:hover {
+            background-color: #2980b9;
+        }
+
+        /* Estilo para a tabela */
+        table {
+            width: 50%; 
+            margin: 20px auto; 
+            border-collapse: collapse; 
+        }
+
+        /* Estilo para as células da tabela */
+        th, td {
+            border: 1px solid #dddddd; 
+            padding: 8px; 
+            text-align: left; 
+        }
+
+        /* Estilo para as células do cabeçalho da tabela */
+        th {
+            background-color: #f2f2f2; 
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Título  -->
+    <h1>Lista de Clientes</h1>
+
+    <!-- Botão  -->
+    <button>Meu Botão</button>
+
+    <!-- Tabela -->
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Data de Nascimento</th>
+                <th>CEP</th>
+                <th>Endereço</th>
+                <th>Telefone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Cliente 1</td>
+                <td>01/01/1990</td>
+                <td>12345-678</td>
+                <td>Rua A, 123</td>
+                <td>(11) 1234-5678</td>
+            </tr>
+            <tr>
+                <td>Cliente 2</td>
+                <td>15/03/1985</td>
+                <td>98765-432</td>
+                <td>Avenida B, 456</td>
+                <td>(22) 9876-5432</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
