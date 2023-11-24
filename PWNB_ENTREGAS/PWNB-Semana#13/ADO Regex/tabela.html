@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabela de Cadastros</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .tabela-container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #4caf50;
+      color: white;
+    }
+
+    button {
+      margin-top: 10px;
+      background-color: #007BFF;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    button.limpar-tabela {
+      background-color: #ff3333;
+    }
+
+    button.limpar-tabela:hover {
+      background-color: #cc0000;
+    }
+  </style>
+</head>
+<body>
+
+<div class="tabela-container" id="tabelaContainer">
+  <h2>Tabela de Cadastros</h2>
+  <button type="button" onclick="voltarParaLogin()">Voltar para a Tela de Login</button>
+  <!-- Botão para limpar a tabela -->
+  <button type="button" class="limpar-tabela" onclick="limparTabela()">Limpar Tabela</button>
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>CPF</th>
+        <th>Data de Nascimento</th>
+        <th>CEP</th>
+      </tr>
+    </thead>
+    <tbody id="tabelaCorpo">
+      <!-- Os dados da tabela serão inseridos aqui -->
+    </tbody>
+  </table>
+</div>
+
+<script>
+  // Função para voltar para a tela de login
+  function voltarParaLogin() {
+    // Redirecionar para a página de login
+    window.location.href = "login.html";
+  }
+
+  // Função para limpar a tabela
+  function limparTabela() {
+    // Limpar os dados do localStorage
+    localStorage.removeItem("dados");
+
+    // Limpar a tabela no HTML
+    var tabelaCorpo = document.getElementById("tabelaCorpo");
+    tabelaCorpo.innerHTML = "";
+  }
+
+  // Função para preencher a tabela com os dados do localStorage
+  function preencherTabela() {
+    var dadosLocalStorage = JSON.parse(localStorage.getItem("dados")) || [];
+
+    var tabelaCorpo = document.getElementById("tabelaCorpo");
+
+    // Limpar a tabela antes de preenchê-la novamente
+    tabelaCorpo.innerHTML = "";
+
+    dadosLocalStorage.forEach(function(cadastro) {
+      var row = tabelaCorpo.insertRow();
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+      var cell3 = row.insertCell(2);
+      var cell4 = row.insertCell(3);
+
+      cell1.innerHTML = cadastro.nome;
+      cell2.innerHTML = cadastro.cpf;
+      cell3.innerHTML = cadastro.dataNascimento;
+      cell4.innerHTML = cadastro.cep;
+    });
+  }
+
+  // Chamar a função para preencher a tabela quando a página carregar
+  preencherTabela();
+</script>
+
+</body>
+</html>
