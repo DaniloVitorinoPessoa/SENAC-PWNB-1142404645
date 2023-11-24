@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastrar cliente</title>
+  <title>Tela de Login</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -63,7 +63,7 @@
 <body>
 
 <div class="login-container" id="loginContainer">
-  <h2>Cadastro cliente</h2>
+  <h2>Tela de Login</h2>
   <form>
     <label for="nome">Nome:</label>
     <input type="text" id="nome" name="nome" required>
@@ -77,43 +77,67 @@
     <label for="cep">CEP:</label>
     <input type="text" id="cep" name="cep" placeholder="00000-000" required>
 
-    <!-- Botão cadastrar -->
+    <!-- Botão para cadastrar -->
     <button type="button" onclick="cadastrar()">Cadastrar</button>
-    <!-- botão tabela -->
+    <!-- Botão para ver a tabela -->
     <button type="button" class="ver-tabela" onclick="verTabela()">Ver Tabela</button>
   </form>
 </div>
 
-
-
-
 <script>
-  //colocar / na data
-  function formatarDataNascimento() {
-    var input = document.getElementById("dataNascimento");
-    var valor = input.value.replace(/\D/g, ''); // Remover caracteres não numéricos
-    if (valor.length > 0) {
-      var dataFormatada = valor.replace(/^(\d{2})(\d{2})(\d{4})$/, '$1/$2/$3');
-      input.value = dataFormatada;
-    }
-  }
-  document.getElementById("dataNascimento").addEventListener("input", formatarDataNascimento);
   function cadastrar() {
     var nome = document.getElementById("nome").value;
     var cpf = document.getElementById("cpf").value;
     var dataNascimento = document.getElementById("dataNascimento").value;
     var cep = document.getElementById("cep").value;
 
+    // Validar CPF com regex
+    var regexCpf = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+    if (!regexCpf.test(cpf)) {
+      alert("Por favor, insira um CPF válido no formato 000.000.000-00");
+      return;
+    }
 
-    // Limpar ocadastro
+    // Validar CEP com regex
+    var regexCep = /^\d{5}-\d{3}$/;
+    if (!regexCep.test(cep)) {
+      alert("Por favor, insira um CEP válido no formato 00000-000");
+      return;
+    }
+
+    // Validar Data de Nascimento com regex
+    var regexDataNascimento = /^\d{2}\/\d{2}\/\d{4}$/;
+    if (!regexDataNascimento.test(dataNascimento)) {
+      alert("Por favor, insira uma Data de Nascimento válida no formato DD/MM/AAAA");
+      return;
+    }
+
+    // Criar um objeto com os dados
+    var novoCadastro = {
+      nome: nome,
+      cpf: cpf,
+      dataNascimento: dataNascimento,
+      cep: cep
+    };
+
+    // Obter os dados existentes do localStorage
+    var dadosLocalStorage = JSON.parse(localStorage.getItem("dados")) || [];
+
+    // Adicionar o novo cadastro à lista
+    dadosLocalStorage.push(novoCadastro);
+
+    // Salvar a lista atualizada no localStorage
+    localStorage.setItem("dados", JSON.stringify(dadosLocalStorage));
+
+    // Limpar os campos da tela de login
     document.getElementById("nome").value = "";
     document.getElementById("cpf").value = "";
     document.getElementById("dataNascimento").value = "";
     document.getElementById("cep").value = "";
   }
-// Redirecionar para tabela
+
   function verTabela() {
-    
+    // Redirecionar para a página da tabela
     window.location.href = "tabela.html";
   }
 </script>
